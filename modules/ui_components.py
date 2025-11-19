@@ -110,7 +110,13 @@ class UIComponents:
     def render_game_card(self, game: Dict):
         """Render individual game card with odds"""
         
-        # Calculate true probabilities (with vig removed)
+        # Calculate implied probabilities (WITH vig)
+        away_implied = OddsFetcher.odds_to_implied_prob(game['a_odds'])
+        home_implied = OddsFetcher.odds_to_implied_prob(game['h_odds'])
+        total_implied = away_implied + home_implied
+        vig_percent = (total_implied - 1) * 100
+        
+        # Calculate true probabilities (vig removed)
         away_prob, home_prob = OddsFetcher.remove_vig(game['a_odds'], game['h_odds'])
         
         # Format odds
@@ -123,6 +129,10 @@ class UIComponents:
         
         # Format date
         date_str = game['start_time'].strftime('%A, %B %d, %Y')
+        
+        # Sportsbook info
+        book_name = game.get('book_name', 'Sportsbook')
+        book_url = game.get('book_url', '#')
         
         st.markdown(f"""
         <div class="game-card">
@@ -142,5 +152,33 @@ class UIComponents:
                     <div class="team-prob">{home_prob:.1f}% Win Probability</div>
                 </div>
             </div>
+            <div style="text-align: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                    Odds from <a href="{book_url}" target="_blank" style="color: var(--accent-primary); text-decoration: none; font-weight: 600;">{book_name}</a>
+                </div>
+                <div style="font-size: 0.7rem; color: var(--text-secondary); font-style: italic;">
+                    Vig: {vig_percent:.2f}% | True probabilities shown above
+                </div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
+        
+        # Debug expander (optional - remove after verification)
+        with st.expander("🔍 Show calculation details"):
+            st.markdown(f"""
+            **Odds Input:**
+            - {away_nickname}: {away_odds_str}
+            - {home_nickname}: {home_odds_str}
+            
+            **Step 1: Implied Probabilities (with vig)**
+            - {away_nickname}: {away_implied*100:.2f}%
+            - {home_nickname}: {home_implied*100:.2f}%
+            - Total: {total_implied*100:.2f}% (vig = {vig_percent:.2f}%)
+            
+            **Step 2: Remove Vig (normalize to 100%)**
+            - {away_nickname}: ({away_implied*100:.2f} / {total_implied*100:.2f}) × 100 = {away_prob:.2f}%
+            - {home_nickname}: ({home_implied*100:.2f} / {total_implied*100:.2f}) × 100 = {home_prob:.2f}%
+            - Total: {away_prob + home_prob:.2f}% ✅
+            
+            **Source:** {book_name}
+            """)
