@@ -96,10 +96,11 @@ class OddsFetcher:
                 away = event.get("away_team", "Unknown")
                 
                 # Virginia-legal books (first available)
-                va_odds = {"home": None, "away": None}
+                va_odds = {"home": None, "away": None, "book_name": None, "book_url": None}
                 
                 for book in event.get("bookmakers", []):
-                    if book.get("key") in self.VA_LEGAL_BOOKS:
+                    book_key = book.get("key")
+                    if book_key in self.VA_LEGAL_BOOKS:
                         markets = book.get("markets", [])
                         if not markets:
                             continue
@@ -112,6 +113,12 @@ class OddsFetcher:
                                 va_odds["home"] = price
                             if name == away and va_odds["away"] is None:
                                 va_odds["away"] = price
+                        
+                        # Store book info
+                        if va_odds["home"] is not None and va_odds["away"] is not None:
+                            va_odds["book_name"] = book.get("title", book_key)
+                            va_odds["book_url"] = self._get_book_url(book_key)
+                            break
                 
                 if va_odds["home"] is not None and va_odds["away"] is not None:
                     games.append({
@@ -121,13 +128,27 @@ class OddsFetcher:
                         "h_odds": va_odds["home"],
                         "a_col": self.TEAM_COLORS.get(away, "#666666"),
                         "h_col": self.TEAM_COLORS.get(home, "#666666"),
-                        "start_time": start
+                        "start_time": start,
+                        "book_name": va_odds["book_name"],
+                        "book_url": va_odds["book_url"]
                     })
         
         # Sort by start time
         games.sort(key=lambda x: x['start_time'])
         
         return games
+    
+    @staticmethod
+    def _get_book_url(book_key: str) -> str:
+        """Get sportsbook URL"""
+        book_urls = {
+            "fanduel": "https://www.fanduel.com/sportsbook",
+            "draftkings": "https://www.draftkings.com/sportsbook",
+            "betmgm": "https://sports.betmgm.com/",
+            "caesars": "https://www.caesars.com/sportsbook",
+            "bet365": "https://www.bet365.com/"
+        }
+        return book_urls.get(book_key, "https://www.google.com/search?q=" + book_key)
     
     @staticmethod
     def odds_to_implied_prob(odds: int) -> float:
