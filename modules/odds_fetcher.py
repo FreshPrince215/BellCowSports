@@ -130,20 +130,41 @@ class OddsFetcher:
         return games
     
     @staticmethod
-    def odds_to_prob(odds: int) -> float:
-        """Convert American odds to probability"""
+    def odds_to_implied_prob(odds: int) -> float:
+        """Convert American odds to implied probability (includes vig)"""
         if odds > 0:
+            # Underdog: 100 / (odds + 100)
             return 100 / (odds + 100)
         else:
+            # Favorite: |odds| / (|odds| + 100)
             return abs(odds) / (abs(odds) + 100)
     
     @staticmethod
-    def normalize_probabilities(away_odds: int, home_odds: int) -> tuple:
-        """Normalize probabilities to sum to 100%"""
-        pa = OddsFetcher.odds_to_prob(away_odds)
-        ph = OddsFetcher.odds_to_prob(home_odds)
-        total = pa + ph
-        return (pa / total * 100, ph / total * 100)
+    def remove_vig(away_odds: int, home_odds: int) -> tuple:
+        """
+        Remove vig from odds to get true win probabilities.
+        
+        Sportsbooks add vig so probabilities sum > 100%.
+        We normalize to 100% to get fair probabilities.
+        
+        Example:
+        - Away +225: implied 30.8%
+        - Home -275: implied 73.3%
+        - Total: 104.1% (4.1% is the vig)
+        - After removing vig: 29.6% / 70.4% = 100%
+        """
+        # Get implied probabilities (with vig)
+        away_implied = OddsFetcher.odds_to_implied_prob(away_odds)
+        home_implied = OddsFetcher.odds_to_implied_prob(home_odds)
+        
+        # Total includes the vig (will be > 100%)
+        total = away_implied + home_implied
+        
+        # Remove vig by normalizing to 100%
+        away_true = (away_implied / total) * 100
+        home_true = (home_implied / total) * 100
+        
+        return (away_true, home_true)
     
     @staticmethod
     def format_odds(odds: int) -> str:
