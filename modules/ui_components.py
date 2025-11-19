@@ -110,8 +110,8 @@ class UIComponents:
     def render_game_card(self, game: Dict):
         """Render individual game card with odds"""
         
-        # Calculate probabilities
-        away_prob, home_prob = OddsFetcher.normalize_probabilities(game['a_odds'], game['h_odds'])
+        # Calculate true probabilities (with vig removed)
+        away_prob, home_prob = OddsFetcher.remove_vig(game['a_odds'], game['h_odds'])
         
         # Format odds
         away_odds_str = OddsFetcher.format_odds(game['a_odds'])
