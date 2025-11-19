@@ -1,0 +1,216 @@
+{
+  "app": {
+    "title": "NFL News Aggregator",
+    "page_icon": "🏈",
+    "cache_ttl": 1800,
+    "days_lookback": 7,
+    "max_workers": 10
+  },
+  "teams": [
+    "Arizona Cardinals",
+    "Atlanta Falcons",
+    "Baltimore Ravens",
+    "Buffalo Bills",
+    "Carolina Panthers",
+    "Chicago Bears",
+    "Cincinnati Bengals",
+    "Cleveland Browns",
+    "Dallas Cowboys",
+    "Denver Broncos",
+    "Detroit Lions",
+    "Green Bay Packers",
+    "Houston Texans",
+    "Indianapolis Colts",
+    "Jacksonville Jaguars",
+    "Kansas City Chiefs",
+    "Las Vegas Raiders",
+    "Los Angeles Chargers",
+    "Los Angeles Rams",
+    "Miami Dolphins",
+    "Minnesota Vikings",
+    "New England Patriots",
+    "New Orleans Saints",
+    "New York Giants",
+    "New York Jets",
+    "Philadelphia Eagles",
+    "Pittsburgh Steelers",
+    "San Francisco 49ers",
+    "Seattle Seahawks",
+    "Tampa Bay Buccaneers",
+    "Tennessee Titans",
+    "Washington Commanders"
+  ],
+  "rss_feeds": {
+    "general_news": [
+      {
+        "name": "ESPN NFL",
+        "url": "https://www.espn.com/espn/rss/nfl/news",
+        "enabled": true
+      },
+      {
+        "name": "NFL Official",
+        "url": "https://www.nfl.com/feeds/rss",
+        "enabled": true
+      },
+      {
+        "name": "NBC Sports",
+        "url": "https://profootballtalk.nbcsports.com/feed/",
+        "enabled": true
+      },
+      {
+        "name": "NBC Edge",
+        "url": "https://www.nbcsports.com/edge/rss/football/nfl/player-news",
+        "enabled": true
+      },
+      {
+        "name": "Yahoo Sports",
+        "url": "https://sports.yahoo.com/nfl/rss/",
+        "enabled": true
+      },
+      {
+        "name": "Fox Sports",
+        "url": "https://api.foxsports.com/v2/content/optimized-rss?partnerKey=MB0Wehpmuj2lUhuRhQaafhBjAJqaPU244mlTDK1i&size=30&tags=fs/nfl",
+        "enabled": true
+      },
+      {
+        "name": "The Athletic",
+        "url": "https://www.nytimes.com/athletic/rss/nfl/",
+        "enabled": true
+      },
+      {
+        "name": "CBS Sports",
+        "url": "https://www.cbssports.com/rss/headlines/nfl/",
+        "enabled": true
+      },
+      {
+        "name": "Bleacher Report",
+        "url": "https://bleacherreport.com/articles/feed?tag_id=16",
+        "enabled": true
+      },
+      {
+        "name": "USA Today",
+        "url": "https://www.usatoday.com/sports/nfl/rss/",
+        "enabled": true
+      }
+    ],
+    "team_feeds": {
+      "Arizona Cardinals": [
+        "https://www.azcardinals.com/rss/news"
+      ],
+      "Atlanta Falcons": [
+        "https://www.atlantafalcons.com/rss/news"
+      ],
+      "Baltimore Ravens": [
+        "https://www.baltimoreravens.com/rss/news",
+        "https://russellstreetreport.com/feed/"
+      ],
+      "Buffalo Bills": [
+        "https://www.buffalobills.com/rss/news"
+      ],
+      "Carolina Panthers": [
+        "https://www.panthers.com/rss/news"
+      ],
+      "Chicago Bears": [
+        "https://www.chicagobears.com/rss/news",
+        "https://www.windycitygridiron.com/rss/index.xml",
+        "https://www.dabearsblog.com/feed"
+      ],
+      "Cincinnati Bengals": [
+        "https://www.bengals.com/rss/news"
+      ],
+      "Cleveland Browns": [
+        "https://www.clevelandbrowns.com/rss/news",
+        "https://brownsplainly.com/blog/feed/"
+      ],
+      "Dallas Cowboys": [
+        "https://www.dallascowboys.com/rss/news",
+        "https://www.bloggingtheboys.com/rss/index.xml"
+      ],
+      "Denver Broncos": [
+        "https://www.denverbroncos.com/rss/news"
+      ],
+      "Detroit Lions": [
+        "https://www.detroitlions.com/rss/news",
+        "https://www.prideofdetroit.com/rss/index.xml"
+      ],
+      "Green Bay Packers": [
+        "https://www.packers.com/rss/news",
+        "https://thepowersweep.com/blog?format=RSS"
+      ],
+      "Houston Texans": [
+        "https://www.houstontexans.com/rss/news"
+      ],
+      "Indianapolis Colts": [
+        "https://www.colts.com/rss/news"
+      ],
+      "Jacksonville Jaguars": [
+        "https://www.jaguars.com/rss/news"
+      ],
+      "Kansas City Chiefs": [
+        "https://www.chiefs.com/rss/news",
+        "https://www.chiefscrowd.com/feed/"
+      ],
+      "Las Vegas Raiders": [
+        "https://www.raiders.com/rss/news",
+        "https://raidersnewswire.com/feed/"
+      ],
+      "Los Angeles Chargers": [
+        "https://www.chargers.com/rss/news"
+      ],
+      "Los Angeles Rams": [
+        "https://www.therams.com/rss/news"
+      ],
+      "Miami Dolphins": [
+        "https://www.miamidolphins.com/rss/news",
+        "https://www.thephinsider.com/rss/index.xml"
+      ],
+      "Minnesota Vikings": [
+        "https://www.vikings.com/rss/news",
+        "https://vikingsterritory.com/feed"
+      ],
+      "New England Patriots": [
+        "https://www.patriots.com/rss/news",
+        "https://www.patspulpit.com/rss/index.xml",
+        "https://www.patspropaganda.com/feed/"
+      ],
+      "New Orleans Saints": [
+        "https://www.neworleanssaints.com/rss/news"
+      ],
+      "New York Giants": [
+        "https://www.giants.com/rss/news"
+      ],
+      "New York Jets": [
+        "https://www.newyorkjets.com/rss/news",
+        "https://nypost.com/new-york-jets/feed/",
+        "https://feeds.feedburner.com/Jetnationcom"
+      ],
+      "Philadelphia Eagles": [
+        "https://www.philadelphiaeagles.com/rss/news",
+        "https://www.bleedinggreennation.com/rss/index.xml"
+      ],
+      "Pittsburgh Steelers": [
+        "https://www.steelers.com/rss/news",
+        "https://feeds.feedburner.com/SteelersDepotBlog",
+        "https://www.steelcityunderground.com/feed/"
+      ],
+      "San Francisco 49ers": [
+        "https://www.49ers.com/rss/news",
+        "https://www.ninersnation.com/rss/index.xml"
+      ],
+      "Seattle Seahawks": [
+        "https://www.seahawks.com/rss/news",
+        "https://www.fieldgulls.com/rss/index.xml"
+      ],
+      "Tampa Bay Buccaneers": [
+        "https://www.buccaneers.com/rss/news",
+        "https://www.pewterreport.com/feed/"
+      ],
+      "Tennessee Titans": [
+        "https://www.tennesseetitans.com/rss/news"
+      ],
+      "Washington Commanders": [
+        "https://www.commanders.com/rss/news"
+      ]
+    }
+  }
+}
