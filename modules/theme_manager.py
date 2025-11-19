@@ -251,6 +251,18 @@ class ThemeManager:
                 border-color: var(--accent-primary);
             }}
             
+            .game-card a {{
+                color: var(--accent-primary);
+                text-decoration: none;
+                font-weight: 600;
+                transition: color 0.2s ease;
+            }}
+            
+            .game-card a:hover {{
+                color: var(--accent-secondary);
+                text-decoration: underline;
+            }}
+            
             .game-header {{
                 display: flex;
                 justify-content: space-between;
